@@ -13,7 +13,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import SearchBar from "@/components/shared/navbar/search-bar";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import MoviePopup from "@/components/shared/movie/movie-popup";
 import axios from "axios";
 import { AccountProps, AccountResponse } from "@/types";
@@ -33,13 +33,16 @@ const Navbar = () => {
   const { account, setAccount, setPageLoader } = useGlobalContext();
   const { data: session }: any = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+
+  console.log(pathname);
 
   useEffect(() => {
     const getAllAccounts = async () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get<AccountResponse>(
-          `/api/account?uid=${session.user.uid}`
+          `/api/account?email=${session.user.email}`
         );
         data.success && setAccounts(data.data as AccountProps[]);
       } catch (e) {
@@ -98,13 +101,15 @@ const Navbar = () => {
             {menuItems.map((item) => (
               <li
                 onClick={() => {
-                  router.push(item.path);
-                  setPageLoader(true);
+                  if (item.path !== pathname) {
+                    router.push(item.path);
+                  }
                 }}
+                style={{ color: item.path === pathname ? "red" : "" }}
                 key={item.path}
-                className={
+                className={cn(
                   "cursor-pointer text-[16px] font-light text-[#555] transition duration-[.4s] hover:text-[#b3b3b3] dark:text-white"
-                }
+                )}
               >
                 {item.title}
               </li>

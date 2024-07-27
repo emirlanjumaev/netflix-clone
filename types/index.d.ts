@@ -1,45 +1,45 @@
-import {Dispatch, ReactNode, SetStateAction} from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface ContextType {
-  account: AccountProps | null
-  setAccount: Dispatch<SetStateAction<AccountProps | null>>
-  pageLoader: boolean
-  setPageLoader: Dispatch<SetStateAction<boolean>>
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-  movie: MovieProps | null
-  setMovie: Dispatch<SetStateAction<MovieProps | null>>
+  account: AccountProps | null;
+  setAccount: Dispatch<SetStateAction<AccountProps | null>>;
+  pageLoader: boolean;
+  setPageLoader: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  movie: MovieProps | null;
+  setMovie: Dispatch<SetStateAction<MovieProps | null>>;
 }
 
 export interface AccountProps {
-  _id: string
-  uid: string
-  name: string
-  pin: string
+  _id: string;
+  uid: string;
+  name: string;
+  pin: string;
 }
 
 export interface ChildProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export interface AxiosResponse {
-  success: boolean
-  message?: string
+  success: boolean;
+  message?: string;
 }
 
 export interface AccountResponse extends AxiosResponse {
-  data: AccountProps[] | AccountProps
+  data: AccountProps[] | AccountProps;
 }
 
 export interface MenuItemProps {
-  id: string
-  title: string
-  path: string
+  id: string;
+  title: string;
+  path: string;
 }
 
 export interface MovieDataProps {
-  title: string,
-  data: MovieProps[]
+  title: string;
+  data: MovieProps[];
 }
 
 export interface MovieProps {
@@ -89,7 +89,7 @@ export interface MovieDetailsProps {
   title: string;
   video: boolean;
   videos: {
-    results: VideoProps[]
+    results: VideoProps[];
   };
   vote_average: number;
   vote_count: number;
@@ -109,13 +109,12 @@ export interface VideoProps {
 }
 
 export interface FavouriteProps {
-  uid: string
-  accountId: string
-  backdrop_path: string
-  poster_path: string
-  movieId: string
-  type: string
-  title: string
-  overview: string
-  _id?: string
+  backdrop_path: string;
+  poster_path: string;
+  movieId: string;
+  type: string;
+  title: string;
+  overview: string;
+  _id?: string;
+  email: string;
 }

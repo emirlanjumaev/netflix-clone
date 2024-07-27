@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useGlobalContext } from "@/context";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { FavouriteProps, MovieProps } from "@/types";
 import { toast } from "@/components/ui/use-toast";
 import { getFavourites } from "@/lib/api";
@@ -22,29 +22,31 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
+    setPageLoader(true);
     const getData = async () => {
       try {
-        const { data } = await getFavourites(session?.user?.uid, account?._id);
+        const { data } = await getFavourites(session?.user?.email);
+
         setFavourites(data);
-      } catch (e) {
+      } catch (e: any) {
         return toast({
           title: "Error",
-          description: "Something went wrong, please try again later",
+          description:
+            e.message || "Something went wrong, please try again later",
           variant: "destructive",
         });
       } finally {
         setPageLoader(false);
       }
     };
-    if (session && account) {
-      getData();
-    }
+    getData();
   }, [account, session]);
 
-  if (session === null) return <Login />;
-  if (account === null) return <ManageAccount />;
   if (pageLoader) return <Loader />;
 
+  if (session === null) return <Login />;
+
+  // if (account === null) return <ManageAccount />;
   return (
     <main className={"flex min-h-screen flex-col"}>
       <Navbar />

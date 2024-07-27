@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub, AiFillGoogleCircle } from "react-icons/ai";
 import { signIn } from "next-auth/react";
 
 const Login = () => {
@@ -33,13 +33,13 @@ const Login = () => {
           </Button>
           <Button
             className={
-              "mt-4 flex items-center gap-2 w-full h-[56px] bg-red-600 !text-white hover:bg-red-500"
+              "mt-4 flex items-center gap-2 w-full h-[56px]  !text-white bg-blue-600 hover:bg-blue-800"
             }
             onClick={() => signIn("google")}
           >
-            <AiFillGithub className={"w-7 h-7"} />
-            Sign in with Github
-          </Button>{" "}
+            <AiFillGoogleCircle className={"w-7 h-7"} />
+            Sign in with Google
+          </Button>
         </div>
       </div>
     </div>

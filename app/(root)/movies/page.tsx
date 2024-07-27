@@ -17,6 +17,7 @@ const Page = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
+    setPageLoader(true);
     const getAllMovies = async () => {
       try {
         const [
@@ -68,11 +69,10 @@ const Page = () => {
     getAllMovies();
   }, []);
 
-  if (session === null) return <Login />;
-  if (account === null) return <ManageAccount />;
   if (pageLoader) return <Loader />;
+  if (session === null) return <Login />;
 
-  return moviesData.length && <Common moviesData={moviesData} />;
+  return moviesData.length > 0 && <Common moviesData={moviesData} />;
 };
 
 export default Page;

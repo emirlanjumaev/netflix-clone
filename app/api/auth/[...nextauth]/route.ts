@@ -1,3 +1,7 @@
+import { toast } from "@/components/ui/use-toast";
+import axios from "axios";
+import { log } from "console";
+import { randomUUID } from "crypto";
 import NextAuth, { Account, NextAuthOptions, Profile, User } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import GithubProvider from "next-auth/providers/github";
@@ -18,24 +22,29 @@ const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async session({ session, token }: any) {
+    async session({ session, token, user }: any) {
       session.user.username = session?.user?.name
         .split(" ")
         .join("")
         .toLowerCase();
       session.user.uid = token.sub;
+
       return session;
     },
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   console.log(user, "user");
-    //   console.log(account, "acc");
-    //   console.log(profile, "prof");
-    //   console.log(email, "email");
-    //   console.log(credentials, "cred");
-
-    //   return true;
-    // },
+    async signIn({ user }) {
+      await axios
+        .post("http://127.0.0.1:3000/api/account", {
+          data: {
+            name: user.name,
+            email: user.email,
+          },
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err));
+      return true;
+    },
   },
+
   secret: process.env.SECRET_KEY,
 };
 

@@ -21,8 +21,6 @@ const Page = () => {
   const { account, pageLoader, setPageLoader } = useGlobalContext();
   const { data: session } = useSession();
 
-  const theme = useTheme();
-
   useEffect(() => {
     setPageLoader(true);
     const getAllMovies = async () => {
@@ -74,18 +72,19 @@ const Page = () => {
         setMoviesData(allMovies);
       } catch (e) {
         console.log(e);
-      } finally {
-        setPageLoader(false);
       }
     };
 
     getAllMovies();
   }, []);
 
-  if (session === null) return <Login />;
-  if (account === null) return <ManageAccount />;
+  if (session !== undefined) setPageLoader(false);
 
-  return moviesData.length && <Common moviesData={moviesData} />;
+  if (pageLoader) return <Loader />;
+  if (!session) return <Login />;
+  // if (account === null) return <ManageAccount />;
+
+  return moviesData.length > 0 && <Common moviesData={moviesData} />;
 };
 
 export default Page;

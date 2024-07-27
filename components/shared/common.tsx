@@ -14,7 +14,7 @@ const Common = ({ moviesData }: Props) => {
     <main className={"flex min-h-screen flex-col"}>
       <Navbar />
 
-      <div className={"relative pl-4 pb-24 lg:space-y-24"}>
+      <div className={"relative px-2 md:px-4 pb-24 lg:space-y-24"}>
         <Banner movies={moviesData && moviesData[0].data} />
 
         <section className={"md:space-y-16"}>
