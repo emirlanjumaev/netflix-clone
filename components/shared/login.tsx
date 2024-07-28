@@ -13,12 +13,13 @@ const Login = () => {
             "https://repository-images.githubusercontent.com/299409710/b42f7780-0fe1-11eb-8460-e459acd20fb4"
           }
           alt={"bg"}
+          objectFit="cover"
           fill
         />
       </div>
       <div
         className={
-          "relative z-10 rounded-md w-[500px] bg-black/60 h-[50vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-8 py-4"
+          "relative z-10 rounded-md max-w-[500px] bg-black/60 h-[50vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-8 py-4"
         }
       >
         <div className={"flex h-full items-center justify-center flex-col"}>

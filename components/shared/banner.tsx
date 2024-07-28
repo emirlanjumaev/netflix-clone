@@ -29,7 +29,7 @@ const Banner = ({ movies }: Props) => {
   return (
     <div
       className={
-        "flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12 lg:pl-24 dark:text-white text-[#555]"
+        "flex flex-col space-y-2 py-16 md:space-y-4 h-[70vh] pt-[150px] lg:h-[65vh] lg:justify-end lg:pb-12 lg:pl-24 dark:text-white text-[#555]"
       }
     >
       <div className="absolute top-0 left-0 h-[95vh] w-full -z-10">
